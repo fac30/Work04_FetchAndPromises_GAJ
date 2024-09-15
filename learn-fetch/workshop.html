@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Learn Fetch & Promises</title>
+  </head>
+  <body>
+    <h1>Open the console</h1>
+    <script>
+      //challenge 1 & 2
+      // const pokeAPI = fetch('https://pokeapi.co/api/v2/pokemon/pikachu')
+      // .then((response)=>{ response.json().then((pikachu)=>
+      //   {console.log(pikachu)})
+      // }).catch((error)=> console.log(error))
+
+
+      const getUser = (username)=>{
+        return fetch(`https://api.github.com/users/${username}`)
+        .then((response) => response.json())
+        
+      }
+      getUser("oliverjam")
+      .then((data)=> console.log(data))
+      .catch((error) => console.log(error))
+    
+      const getRepos = (user) =>{
+       return fetch(user.repos_url).then((response) => response.json());
+      }
+    
+      getUser("oliverjam")
+        .then(getRepos)
+        .then(console.log)
+        .then(console.error)
+
+const user1 = getUser('mojombo')
+const user2 = getUser('pjhyett')
+    Promise.all([user1, user2]).then(console.log).then(console.error)
+
+    </script>
+  </body>
+</html>
